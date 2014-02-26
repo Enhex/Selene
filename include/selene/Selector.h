@@ -288,37 +288,37 @@ public:
 
     // Chaining operators. If the selector is an rvalue, modify in
     // place. Otherwise, create a new Selector and return it.
-    Selector&& operator[](const char *name) && {
-        _name += std::string(".") + name;
-        _check_create_table();
-        _traversal.push_back(_get);
-        _get = [this, name]() {
-            lua_getfield(_state, -1, name);
-        };
-        _put = [this, name](Fun fun) {
-            fun();
-            lua_setfield(_state, -2, name);
-            lua_pop(_state, 1);
-        };
-        return std::move(*this);
-    }
-    Selector&& operator[](const int index) && {
-        _name += std::string(".") + std::to_string(index);
-        _check_create_table();
-        _traversal.push_back(_get);
-        _get = [this, index]() {
-            lua_pushinteger(_state, index);
-            lua_gettable(_state, -2);
-        };
-        _put = [this, index](Fun fun) {
-            lua_pushinteger(_state, index);
-            fun();
-            lua_settable(_state, -3);
-            lua_pop(_state, 1);
-        };
-        return std::move(*this);
-    }
-    Selector operator[](const char *name) const & {
+    //Selector&& operator[](const char *name) && {
+    //    _name += std::string(".") + name;
+    //    _check_create_table();
+    //    _traversal.push_back(_get);
+    //    _get = [this, name]() {
+    //        lua_getfield(_state, -1, name);
+    //    };
+    //    _put = [this, name](Fun fun) {
+    //        fun();
+    //        lua_setfield(_state, -2, name);
+    //        lua_pop(_state, 1);
+    //    };
+    //    return std::move(*this);
+    //}
+    //Selector&& operator[](const int index) && {
+    //    _name += std::string(".") + std::to_string(index);
+    //    _check_create_table();
+    //    _traversal.push_back(_get);
+    //    _get = [this, index]() {
+    //        lua_pushinteger(_state, index);
+    //        lua_gettable(_state, -2);
+    //    };
+    //    _put = [this, index](Fun fun) {
+    //        lua_pushinteger(_state, index);
+    //        fun();
+    //        lua_settable(_state, -3);
+    //        lua_pop(_state, 1);
+    //    };
+    //    return std::move(*this);
+    //}
+    Selector operator[](const char *name) const /*&*/ {
         auto n = _name + "." + name;
         _check_create_table();
         auto traversal = _traversal;
@@ -333,7 +333,7 @@ public:
         };
         return Selector{_state, _registry, n, traversal, get, put};
     }
-    Selector operator[](const int index) const & {
+    Selector operator[](const int index) const /*& */{
         auto name = _name + "." + std::to_string(index);
         _check_create_table();
         auto traversal = _traversal;
