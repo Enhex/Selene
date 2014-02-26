@@ -4,9 +4,9 @@
 #include "traits.h"
 
 extern "C" {
-#include <lua.h>
-#include <lauxlib.h>
-#include <lualib.h>
+#include <lua5.2/lua.h>
+#include <lua5.2/lauxlib.h>
+#include <lua5.2/lualib.h>
 }
 
 /* The purpose of this header is to handle pushing and retrieving
@@ -177,27 +177,27 @@ T _pop(_id<T> t, lua_State *l) {
 /* Setters */
 
 inline void _push(lua_State *l) {}
-void _push(lua_State *l, bool b) {
+inline void _push(lua_State *l, bool b) {
     lua_pushboolean(l, b);
 }
 
-void _push(lua_State *l, int i) {
+inline void _push(lua_State *l, int i) {
     lua_pushinteger(l, i);
 }
 
-void _push(lua_State *l, unsigned int u) {
+inline void _push(lua_State *l, unsigned int u) {
     lua_pushunsigned(l, u);
 }
 
-void _push(lua_State *l, lua_Number f) {
+inline void _push(lua_State *l, lua_Number f) {
     lua_pushnumber(l, f);
 }
 
-void _push(lua_State *l, const std::string &s) {
+inline void _push(lua_State *l, const std::string &s) {
     lua_pushlstring(l, s.c_str(), s.size());
 }
 
-void _push(lua_State *l, const char *s) {
+inline void _push(lua_State *l, const char *s) {
     lua_pushstring(l, s);
 }
 
