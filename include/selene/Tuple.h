@@ -12,7 +12,7 @@ public:
     Tuple(T&... args) : _tuple(args...) {}
 
     void operator=(const sel::Selector &s) {
-        _tuple = s.GetTuple<typename std::remove_reference<T>::type...>(); // cl.exe crashes here
+        _tuple = s.GetTuple<typename std::remove_reference<T>::type...>(); // cl.exe crashes here if used in a test
     }
 };
 

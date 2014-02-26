@@ -29,7 +29,7 @@ bool test_multi_return(sel::State &state) {
 }
 
 bool test_heterogeneous_return(sel::State &state) {
-//    state.Load("../test/test.lua");
+//    state.Load("../test/test.lua"); -- uses Tuple::operator= and crashes VC2013
 //    int x;
 //    bool y;
 //    std::string z;
@@ -118,7 +118,7 @@ std::tuple<int, int> my_sum_and_difference(int x, int y) {
 }
 
 bool test_multivalue_c_fun_return(sel::State &state) {
-    //state.Load("../test/test.lua");
+    //state.Load("../test/test.lua"); -- uses Tuple::operator= which crashes VC2013
     //state["test_fun"] = &my_sum_and_difference;
     //int sum, difference;
     //sel::tie(sum, difference) = state["test_fun"](-2, 2);
