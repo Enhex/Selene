@@ -202,7 +202,7 @@ public:
         auto fun_tuple = std::make_tuple(funs...);
         auto push = [this, &fun_tuple]() {
             typename detail::_indices_builder<sizeof...(Funs)>::type d;
-            _registry.RegisterClass<T, Args...>(_name, fun_tuple, d);
+            _registry.RegisterClass<T, Args...>(_name, fun_tuple, d); // cl.exe crashes here
         };
         _put(push);
         lua_settop(_state, 0);

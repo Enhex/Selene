@@ -70,7 +70,7 @@ static TestMap tests = {
 
 // Executes all tests and returns the number of failures.
 int ExecuteAll() {
-    const int num_tests = tests.size();
+    const int num_tests = static_cast<int>(tests.size());
     std::cout << "Executing " << num_tests << " tests..." << std::endl;
     std::vector<std::string> failures;
     int passing = 0;

@@ -23,7 +23,7 @@ public:
     R operator()(Args... args) {
         _ref.Push(_state);
         detail::_push_n(_state, args...);
-        constexpr int num_args = sizeof...(Args);
+        const int num_args = sizeof...(Args);
         lua_call(_state, num_args, 1);
         R ret = detail::_pop(detail::_id<R>{}, _state);
         lua_settop(_state, 0);
@@ -46,7 +46,7 @@ public:
     void operator()(Args... args) {
         _ref.Push(_state);
         detail::_push_n(_state, args...);
-        constexpr int num_args = sizeof...(Args);
+        const int num_args = sizeof...(Args);
         lua_call(_state, num_args, 1);
         lua_settop(_state, 0);
     }
@@ -68,8 +68,8 @@ public:
     std::tuple<R...> operator()(Args... args) {
         _ref.Push(_state);
         detail::_push_n(_state, args...);
-        constexpr int num_args = sizeof...(Args);
-        constexpr int num_ret = sizeof...(R);
+        const int num_args = sizeof...(Args);
+        const int num_ret = sizeof...(R);
         lua_call(_state, num_args, num_ret);
         return detail::_pop_n_reset<R...>(_state);
     }

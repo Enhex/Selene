@@ -32,7 +32,7 @@ inline bool _get(_id<bool>, lua_State *l, const int index) {
 }
 
 inline int _get(_id<int>, lua_State *l, const int index) {
-    return lua_tointeger(l, index);
+    return static_cast<int>(lua_tointeger(l, index));
 }
 
 inline unsigned int _get(_id<unsigned int>, lua_State *l, const int index) {
