@@ -32,7 +32,7 @@ public:
 
     template <typename Ret, typename... Args>
     void Register(std::function<Ret(Args...)> fun) {
-        constexpr int arity = detail::_arity<Ret>::value;
+        const int arity = detail::_arity<Ret>::value;
         auto tmp = std::unique_ptr<BaseFun>(
             new Fun<arity, Ret, Args...>{_state, fun});
         _funs.push_back(std::move(tmp));
@@ -40,7 +40,7 @@ public:
 
     template <typename Ret, typename... Args>
     void Register(Ret (*fun)(Args...)) {
-        constexpr int arity = detail::_arity<Ret>::value;
+        const int arity = detail::_arity<Ret>::value;
         auto tmp = std::unique_ptr<BaseFun>(
             new Fun<arity, Ret, Args...>{_state, fun});
         _funs.push_back(std::move(tmp));

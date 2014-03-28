@@ -226,7 +226,7 @@ inline void _push(lua_State *l, std::tuple<>) {}
 
 template <typename... T>
 void _push(lua_State *l, const std::tuple<T...> &values) {
-    constexpr int num_values = sizeof...(T);
+    const int num_values = sizeof...(T);
     _push_dispatcher(l, values,
                      typename _indices_builder<num_values>::type());
 }
